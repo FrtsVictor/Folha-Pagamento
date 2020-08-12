@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +35,6 @@ public class Teste {
         String diretorio;
         String diretorioFixed;
 
-
         //_________
         Scanner fileInput = new Scanner(System.in); // Inicia o Scanner
         System.out.println("Diretorio?"); // Pedindo diretório pro usuario
@@ -45,7 +45,7 @@ public class Teste {
 
 
 
-            // FileInputStream arq = new FileInputStream("C:\\Estudos\\Java_VSC\\aula11\\arquivo.dat");
+        // FileInputStream arq = new FileInputStream("C:\\Estudos\\Java_VSC\\aula11\\arquivo.dat");
             // DataInputStream lerArq = new DataInputStream(arq);
             // String resultado = lerArq.readLine();
             // System.out.println(resultado);
@@ -53,26 +53,45 @@ public class Teste {
         String aq;
 
         try {
-
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
             BufferedReader arquivoEntrada = new BufferedReader(new FileReader(diretorioFixed)); 
-            String leitura  = arquivoEntrada.readLine();           
-
+            
+            //LISTA DE FUNCIONARIOS
+            List <Funcionario> listaFuncionario = new ArrayList<Funcionario>();
+            
+            //C:\AAAA\Prova\src\enumm\tabela.csv
+            
+            while(arquivoEntrada.ready()){
+            String leitura  = arquivoEntrada.readLine();
             String[] pessoa = leitura.split(";");
+            System.out.println(leitura.length());
            
+           
+            
+            if(leitura.length() > 0 ){                    
+                Funcionario funcionario = new Funcionario(pessoa[0], pessoa[1], LocalDate.parse(pessoa[2], formatter), Double.parseDouble(pessoa[3]));
+                listaFuncionario.add(funcionario);
+                
+                if(pessoa[3] == "OUTROS" || pessoa[3] == "FILHO" || pessoa[3] == "SOBRINHO"){
+                    Dependente depenten = new Dependente(pessoa[0], pessoa[1], LocalDate.parse(pessoa[2] formatter), );
 
-            for (String a: pessoa){
-                System.out.println(a);
-                for (String b: pessoa){
-                        pessoa = leitura.split("\n");
+                    funcionario.adicionarDependente(depenten);
+
                 }
             }
+                
+                
+            }
+        
+                
+                for (Funcionario funcionario : listaFuncionario) {
+                    System.out.println(funcionario);
+                }       
             
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-            Funcionario funcionario = new Funcionario(pessoa[0], pessoa[1], LocalDate.parse(pessoa[2], formatter), Double.parseDouble(pessoa[3]));
             
-            System.out.println(funcionario.toString());
+            
+            //CONSTRUTOR FUNCIONARIO
+            
             
 
     

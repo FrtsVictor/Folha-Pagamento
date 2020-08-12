@@ -22,7 +22,6 @@ public class Funcionario extends Pessoa implements CalcularImpostoRenda {
     }
 
     
-
     public void adicionarDependente(Dependente dp) {
         this.verificarTamCpf();
         this.verificarCpfRepetido();
