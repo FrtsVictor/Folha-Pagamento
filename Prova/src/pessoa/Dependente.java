@@ -1,12 +1,12 @@
-package pessoa;
+package provinha.src.pessoa;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-import enumm.Parentesco;
-import exception.DependenteException;
+import provinha.src.enumm.Parentesco;
+import provinha.src.exception.DependenteException;
 
-public class Dependente extends Pessoa {
+public final class Dependente extends Pessoa {
 
     private Parentesco parentesco;
     private final LocalDate diaAtual = LocalDate.now();
@@ -17,6 +17,7 @@ public class Dependente extends Pessoa {
         this.parentesco = parentesco;
         this.idade = Period.between(super.dataNascimento, this.diaAtual).getYears();
         this.verificarIdade();
+        
     }
     
     public void verificarIdade() {

@@ -1,14 +1,15 @@
-package pessoa;
+package provinha.src.pessoa;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import exception.DependenteException;
-import interfaces.CalcularImpostoRenda;
+import provinha.src.exception.DependenteException;
+import provinha.src.interfaces.CalcularImpostoRenda;
 
 public class Funcionario extends Pessoa implements CalcularImpostoRenda {
     
+    private String rg;
     private double salarioBruto;
     private double descontoINSS; 
     private double descontoIR;
@@ -16,10 +17,19 @@ public class Funcionario extends Pessoa implements CalcularImpostoRenda {
     private List<Dependente> listaDependente = new ArrayList<Dependente>();
     
     
-    public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) {
+    public Funcionario(String nome, String cpf, String rg, LocalDate dataNascimento, double salarioBruto) {
         super(nome, cpf, dataNascimento);
         this.salarioBruto = salarioBruto;
+        this.rg = rg;
     }
+
+
+    public void listarDependentes(){
+        for (Dependente dp : listaDependente) {
+            System.out.println(dp.toString());
+        }
+    }
+
 
     
     public void adicionarDependente(Dependente dp) {
@@ -30,7 +40,37 @@ public class Funcionario extends Pessoa implements CalcularImpostoRenda {
     
 
 
-    public void verificarTamCpf(){
+    public String getRg() {
+		return rg;
+	}
+
+
+	public double getSalarioBruto() {
+		return salarioBruto;
+	}
+
+
+	public double getDescontoINSS() {
+		return descontoINSS;
+	}
+
+
+	public double getDescontoIR() {
+		return descontoIR;
+	}
+
+
+	public double getDeducao() {
+		return deducao;
+	}
+
+
+	public List<Dependente> getListaDependente() {
+		return listaDependente;
+	}
+
+
+	public void verificarTamCpf(){
         if (this.cpf.length() !=11){
             throw new DependenteException("Dependente: " + this.cpf + " possui um CPF inválido você digitou um cpf");
         }

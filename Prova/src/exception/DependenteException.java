@@ -1,4 +1,4 @@
-package exception;
+package provinha.src.exception;
 
 
 public class DependenteException extends RuntimeException{

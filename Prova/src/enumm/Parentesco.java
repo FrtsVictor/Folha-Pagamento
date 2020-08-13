@@ -1,4 +1,4 @@
-package enumm;
+package provinha.src.enumm;
 
 public enum Parentesco {
 

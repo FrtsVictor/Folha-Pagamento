@@ -1,4 +1,4 @@
-package interfaces;
+package provinha.src.interfaces;
 
 public interface CalcularINSS {
 

@@ -1,4 +1,4 @@
-package pessoa;
+package provinha.src.pessoa;
 
 import java.time.LocalDate;
 import java.time.Period;
