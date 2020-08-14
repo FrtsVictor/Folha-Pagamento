@@ -17,7 +17,6 @@ import br.com.serratec.folhaPagamento.enums.Parentesco;
 import br.com.serratec.folhaPagamento.exceptions.DependenteException;
 
 public class FolhaPagamento {
-	
 
 	public static void exibirMenu() {
 		System.out.println("_______Sistema para Calculo de Folha de Pagamento_______\n");
@@ -29,6 +28,7 @@ public class FolhaPagamento {
 
 	public static void main(String[] args) {
 
+			
 		int menu;
 		String nome, cpf, rg, dataString, tipoDependente,  diretorio, diretorioFixed;
 		double salarioBruto;
@@ -89,8 +89,23 @@ public class FolhaPagamento {
 					System.out.println("Funcionario possui mais dependentes? sim/nao");
 					resposta1 = dp.nextLine().toLowerCase();
 				}
+				
 				funcionario.calcularImpostoRenda();	
-																
+				
+				String basePath2 = new File("").getAbsolutePath().concat("\\src\\br\\com\\serratec\\folhaPagamento\\arquivos\\calculoPagamentoViaInput.csv");
+
+				
+				try {
+					BufferedWriter bf2 = new BufferedWriter(new FileWriter(basePath2));
+					
+				for (Funcionario func : listaFuncionarioInput) {
+					bf2.write(func.getNome() + ";" + func.getCpf() + ";" +  String.format("%.2f", func.getDescontoINSS()) + ";" + String.format("%.2f", func.getDescontoIR()) + ";" + String.format("%.2f", func.getSalarioLiquido()) +";"+ "\r\n \r\n");
+					bf2.close();
+					} 
+				}catch (IOException e) {
+				// TODO Auto-generated catch block
+						e.printStackTrace();
+					}				
 			}break;
 			case 2:{
 				
@@ -161,8 +176,7 @@ public class FolhaPagamento {
 						
 						for (Funcionario func : listaFuncionario) {
 							
-							System.out.println(func.getNome());
-							
+							System.out.println(func.getNome());							
 							System.out.printf("Salario Bruto: %.2f", func.getSalarioBruto());
 							System.out.printf("\nDesconto INSS: %.2f", func.getDescontoINSS());
 							System.out.printf("\nDesconto IR: %.2f", func.getDescontoIR());
@@ -190,14 +204,10 @@ public class FolhaPagamento {
 				
 			}
 			
-		} while (menu != 0);
-	
-		entradaDiretorio.close();
-		inMenu.close();
-		entradaDp.close();
-		entradaF.close();
-		dp.close();
-		
-	}
-	
+		}while(menu!=0);
+
+	entradaDiretorio.close();inMenu.close();entradaDp.close();entradaF.close();dp.close();
+
+}
+
 }
