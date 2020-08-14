@@ -1,13 +1,15 @@
 package provinha.src.pessoa;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 
 import provinha.src.enumm.Parentesco;
 import provinha.src.exception.DependenteException;
@@ -36,7 +38,7 @@ public class Teste2 {
 		Scanner dp = new Scanner(System.in);
 		
 		
-		System.out.println("Bem vindo ao sistema de Calculo IR para funcionários!!!\n");
+		System.out.println("Bem vindo ao sistema de Calculo IR para funcionï¿½rios!!!\n");
 
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -62,6 +64,7 @@ public class Teste2 {
 				Funcionario funcionario = new Funcionario(nome, cpf, rg, dataNascimento, salarioBruto);
 				listaFuncionarioInput.add(funcionario);
 				
+				
 				System.out.println("Funcionario possui dependentes? sim/nao");
 				
 				String resposta1 = dp.nextLine();
@@ -86,15 +89,19 @@ public class Teste2 {
 				funcionario.calcularImpostoRenda();				
 			}break;
 			case 2:{
+				
 				System.out.println("Lista de Funcionario com seus dependentes");
 				for (Funcionario func : listaFuncionarioInput) {
+					/*
             		System.out.println(func.getNome());
             		System.out.printf("Salario Bruto: %.2f", func.getSalarioBruto());
             		System.out.printf("\nDesconto INSS: %.2f", func.getDescontoINSS());
-            		System.out.printf("\nData Nascimento: ", func.getDataNascimento());
+            		System.out.printf("\nData Nascimento: ", func.mostrarData());
             		System.out.printf("\nDesconto IR: %.2f", func.getDescontoIR());
             		System.out.printf("\nSalario Liq: %.2f", func.getSalarioLiquido());
-            		System.out.println(func.getListaDependente());
+            		System.out.println(func.getListaDependente());*/
+					
+					System.out.println(func.toString());
 					}
 			}break;
 			case 3:				
@@ -141,21 +148,35 @@ public class Teste2 {
 							}
 						} // FIM DO WHILE MAIOR
 						
+						//arquivoSaida = sc.next();
+						BufferedWriter bf = new BufferedWriter(new FileWriter("C:\\Users\\Usuario\\Desktop\\TesteSaida.csv"));
+						
 						for (Funcionario func : listaFuncionario) {
+							
 							System.out.println(func.getNome());
+							
 							System.out.printf("Salario Bruto: %.2f", func.getSalarioBruto());
-							System.out.printf("\nDisconto INSS: %.2f", func.getDescontoINSS());
-							System.out.printf("\nDisconto IR: %.2f", func.getDescontoIR());
+							System.out.printf("\nDesconto INSS: %.2f", func.getDescontoINSS());
+							System.out.printf("\nDesconto IR: %.2f", func.getDescontoIR());
 							System.out.printf("\nSalario Liq: %.2f", func.getSalarioLiquido());
 							System.out.println(func.getListaDependente());
+							bf.write(func.getNome() + ";" + func.getCpf() + ";" +  String.format("%.2f", func.getDescontoINSS()) + ";" + String.format("%.2f", func.getDescontoIR()) + ";" + String.format("%.2f", func.getSalarioLiquido()) + "\n");
+							
 						}
+						bf.close();
 					} 
-					break;
+					
 					
 				}catch (FileNotFoundException e) {
 					e.getMessage();
+				} catch (IOException e) {
+					System.out.println("Erro ao criar arquivo de saÃ­da.");
+					e.printStackTrace();
 				}
-				
+				break;
+			case 0:
+				System.out.println("Sistema encerrado.");
+				break;
 			default: System.out.println("Digite um valor valido\n");
 				
 			}
