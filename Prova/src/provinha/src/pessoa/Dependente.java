@@ -38,9 +38,9 @@ public final class Dependente extends Pessoa {
 	@Override
 	public String toString() {
 		return "\nDependente nome: 		" + nome+ "\n" + 
-				"Parentesco:			" +parentesco + "\n" + 
-				"Idade:                  	" + idade +" anos" + "\n" + 
-				"CPF:   				" +cpf +"\n" + 
+				"Parentesco:			" + parentesco + "\n" + 
+				"Idade:                 " + idade +" anos" + "\n" + 
+				"CPF:   				" + cpf +"\n" + 
 				"Data Nascimento:  		" + dataNascimento + "\n";
 	}
         

@@ -13,7 +13,6 @@ public class Funcionario extends Pessoa implements CalcularImpostoRenda {
 	private double salarioBruto;
 	private double descontoINSS;
 	private double descontoIR;
-	private double deducao;
 	private double salarioLiquido;
 	private List<Dependente> listaDependente = new ArrayList<Dependente>();
 	
@@ -57,9 +56,6 @@ public class Funcionario extends Pessoa implements CalcularImpostoRenda {
 		return salarioLiquido;
 	}
 
-	public double getDeducao() {
-		return deducao;
-	}
 
 	public List<Dependente> getListaDependente() {
 		return listaDependente;
@@ -128,12 +124,22 @@ public class Funcionario extends Pessoa implements CalcularImpostoRenda {
 	public double calcularSalarioLiquido() {
 		return salarioLiquido = salarioBruto - descontoINSS - descontoIR;
 	}
+	
+	public LocalDate mostrarData() {
+		return dataNascimento;
+	}
 
 	@Override
 	public String toString() {
-		return "Nome funcionario:		" + nome + "\n" + "Cpf:		            " + cpf + "\n"
-				+ "Salario bruto:         " + salarioBruto + "\n" + "RG:                    " + rg
-				+ "Dependentes:            " + listaDependente;
+		return "Nome funcionario:		" + nome + "\n" + 
+				"Cpf:		            " + cpf + "\n" + 
+				"Salario bruto:  	    " + salarioBruto + "\n" + 
+				"RG:       	            " + rg + 
+				"\nData de nascimento:	" + dataNascimento +
+				"\nDependentes:         " + listaDependente;
+	}
+	public static void main(String[] args) {
+		
 	}
 
 }

@@ -16,7 +16,14 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
  
+    
     		
+	public Pessoa() {
+		super();
+	}
+
+
+
 	public void verificarTamCpf(){
         if (this.cpf.length() != 11){
             throw new CPFException("Pessoa " + nome + " de cpf " + this.cpf + " possui um CPF invalido");
