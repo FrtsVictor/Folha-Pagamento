@@ -1,11 +1,8 @@
-package br.com.serratec.folhaPagamento.classes;
-
+package br.com.serratec.folhaPagamento.classeConcreta;
 import java.time.LocalDate;
 import java.time.Period;
-
 import br.com.serratec.folhaPagamento.enums.Parentesco;
 import br.com.serratec.folhaPagamento.exceptions.DependenteException;
-
 
 public final class Dependente extends Pessoa {
 

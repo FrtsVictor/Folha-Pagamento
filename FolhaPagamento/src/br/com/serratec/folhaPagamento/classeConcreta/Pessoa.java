@@ -1,9 +1,6 @@
-package br.com.serratec.folhaPagamento.classes;
-
+package br.com.serratec.folhaPagamento.classeConcreta;
 import java.time.LocalDate;
-
 import br.com.serratec.folhaPagamento.exceptions.CPFException;
-
 
 public abstract class Pessoa {
     protected String nome;
@@ -16,20 +13,15 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
  
-    
-    		
 	public Pessoa() {
 		super();
 	}
-
-
 
 	public void verificarTamCpf(){
         if (this.cpf.length() != 11){
             throw new CPFException("Pessoa " + nome + " de cpf " + this.cpf + " possui um CPF invalido");
         }
     }
-
 
     public String getNome() {
         return nome;
@@ -52,7 +44,6 @@ public abstract class Pessoa {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -70,5 +61,4 @@ public abstract class Pessoa {
 		return true;
 	}
       
-
 }
