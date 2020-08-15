@@ -19,7 +19,7 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 		super(nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
 		this.rg = rg;
-		super.verificarTamCpf();
+		//super.verificarTamCpf();
 	}	
 	
 	final public void adicionarDependente(Dependente dp) {
@@ -45,12 +45,11 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 	public double getSalarioLiquido() {
 		return salarioLiquido;
 	}
-	
 
 	public List<Dependente> getListaDependente() {
 		return listaDependente;
 	}
-	
+
 		
 	public void listarDependentes() {
 		for (Dependente dp : listaDependente) {
