@@ -1,4 +1,5 @@
 package br.com.serratec.folhaPagamento.classeConcreta;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,6 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 	public List<Dependente> getListaDependente() {
 		return listaDependente;
 	}
-
 		
 	public void listarDependentes() {
 		for (Dependente dp : listaDependente) {
@@ -140,10 +140,13 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 	@Override
 	public String toString() {
 		return "Nome funcionario:		" + nome + "\n" + 
-				"Cpf:		                " + cpf + "\n" + 
-				"Salario bruto:  	        " + salarioBruto + "\n" + 
-				"RG:       	                " + rg + 
+				"Cpf:		                " + cpf + 
+				"\nRG:       	                " + rg + 
 				"\nData de nascimento:	        " + dataNascimento +
+				"\nSalario bruto:  	        " + new DecimalFormat("####.##").format(salarioBruto) +
+				"\nDesconto INSS:                  " + new DecimalFormat("####.##").format(descontoINSS) +
+				"\nDesconto Imposto Renda:         "+ new DecimalFormat("####.##").format(descontoIR) +
+				"\nSalario liquido:                "+ new DecimalFormat("####.##").format(salarioBruto) +
 				"\nDependentes:                    " + listaDependente;
 	}
 }
