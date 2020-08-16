@@ -38,12 +38,12 @@ public class Menu {
     
 
     public void exibirMenu(){
-		System.out.println("_______Sistema para Calculo de Folha de Pagamento_______\n");
-		System.out.println("1 - Para adicionar funcionarios e dependentes via console");
-		System.out.println("2 - Para listar funcionarios e dependentes adicionados via console");
-		System.out.println("3 - Para gravar entrada de funcionarios via console.");
-		System.out.println("4 - Para adicionar e calcular funcionarios e dependentes via arquivo .csv");
-		System.out.println("0 - Para sair do menu");
+		System.out.println("(1) - Adicionar funcionarios e dependentes via console");
+		System.out.println("(2) - Listar funcionarios e dependentes adicionados via console");
+		System.out.println("(3) - Gravar entrada de funcionarios via console.");
+		System.out.println("(4) - Adicionar e calcular funcionarios e dependentes via arquivo .csv");
+        System.out.println("(0) - Sair do programa.");
+        System.out.println("v1.1\n");
 	}
 
     
@@ -91,8 +91,9 @@ public class Menu {
             System.out.printf("\n%s - Dependente adicionado com sucesso!!\n\n" , horario);
             System.out.println("Funcionario possui mais dependentes? sim/nao");
             resposta1 = dp.nextLine().toLowerCase();
-         }    
-          funcionario.calcularImpostoRenda();
+         }
+         Calculos calc = new Calculos(funcionario);    
+          calc.calcularImpostoRenda();
         }
         
         //Listar funcionarios e dependentes adicionados manualmente.
@@ -144,8 +145,8 @@ public class Menu {
                         Dependente dependente = new Dependente(pessoa[0], pessoa[1],LocalDate.parse(pessoa[2], formatter), Parentesco.valueOf(pessoa[3]));
                         funcionario.adicionarDependente(dependente);
                     }
-
-                    funcionario.calcularImpostoRenda();
+                    Calculos calc = new Calculos(funcionario);
+                    calc.calcularImpostoRenda();
                     funcionario.verificarCpfRepetidoDependente();
                 } 
 
