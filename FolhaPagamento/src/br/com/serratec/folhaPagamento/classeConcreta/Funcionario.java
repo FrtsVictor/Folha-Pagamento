@@ -4,9 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.serratec.folhaPagamento.exceptions.DependenteException;
-import br.com.serratec.folhaPagamento.interfaces.CalcularImpostoRenda;
 
-public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
+public final class Funcionario extends Pessoa  {
 
 	private String rg;
 	private double salarioBruto;
@@ -23,6 +22,9 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 		//super.verificarTamCpf();
 	}	
 	
+	public Funcionario() {
+	}
+
 	final public void adicionarDependente(Dependente dp) {
 		listaDependente.add(dp);
 	}
@@ -72,7 +74,7 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 		}
 	}
 
-	public void verificarCpfRepetidoFuncionario(List<Funcionario> listaF ){
+	final public void verificarCpfRepetidoFuncionario(List<Funcionario> listaF ){
 		for (Funcionario fun : listaF) {
 			int cont = 0;
 			for (Funcionario func : listaF) {
@@ -86,52 +88,7 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 		}
 	}
 	
-	@Override
-	public void calcularINSS() {
-
-		if (salarioBruto <= 1751.81) {
-			descontoINSS = salarioBruto * 0.08;
-
-		} else if (salarioBruto >= 1751.82 && salarioBruto <= 2919.72) {
-			descontoINSS = salarioBruto * 0.09;
-
-		} else if (salarioBruto >= 2919.73 && salarioBruto <= 5839.45) {
-			descontoINSS = salarioBruto * 0.11;
-
-		} else if (salarioBruto >= 5839.45) {
-			descontoINSS = 5839.45 * 0.11;
-		}
-	}
-
-	@Override
-	public void calcularImpostoRenda() {
-		this.calcularINSS();
-
-		descontoIR = salarioBruto - descontoINSS - 189.59 * listaDependente.size();
-
-		if (descontoIR >= 4664.68) {
-			descontoIR = descontoIR * 0.275 - 869.36;
-
-		} else if (descontoIR >= 3751.06) {
-			descontoIR = descontoIR * 0.225 - 636.13;
-
-		} else if (descontoIR >= 2826.66) {
-			descontoIR = descontoIR * 0.15 - 354.80;
-
-		} else if (descontoIR >= 1903.98) {
-			descontoIR = descontoIR * 0.075 - 142.80;
-
-		} else {
-			descontoIR = 0;
-		}
-
-		this.calcularSalarioLiquido();
-
-	}
-
-	public double calcularSalarioLiquido() {
-		return salarioLiquido = salarioBruto - descontoINSS - descontoIR;
-	}
+	
 	
 	public LocalDate mostrarData() {
 		return dataNascimento;
@@ -146,7 +103,19 @@ public final class Funcionario extends Pessoa implements CalcularImpostoRenda {
 				"\nSalario bruto:  	        " + new DecimalFormat("####.##").format(salarioBruto) +
 				"\nDesconto INSS:                  " + new DecimalFormat("####.##").format(descontoINSS) +
 				"\nDesconto Imposto Renda:         "+ new DecimalFormat("####.##").format(descontoIR) +
-				"\nSalario liquido:                "+ new DecimalFormat("####.##").format(salarioBruto) +
+				"\nSalario liquido:                "+ new DecimalFormat("####.##").format(salarioLiquido) +
 				"\nDependentes:                    " + listaDependente;
+	}
+
+	public void setDescontoINSS(double descontoINSS) {
+		this.descontoINSS = descontoINSS;
+	}
+
+	public void setDescontoIR(double descontoIR) {
+		this.descontoIR = descontoIR;
+	}
+
+	public void setSalarioLiquido(double salarioLiquido) {
+		this.salarioLiquido = salarioLiquido;
 	}
 }
