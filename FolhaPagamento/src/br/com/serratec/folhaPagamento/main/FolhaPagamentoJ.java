@@ -4,33 +4,35 @@ import java.util.Scanner;
 
 import br.com.serratec.folhaPagamento.classeConcreta.Menu;
 
-public class FolhaPagamento {
+
+public class FolhaPagamentoJ {
 
 	public static void main(String[] args) {
 			
 		
-		Menu menuC = new Menu();
-		
-		System.out.println("Bem vindo ao sistema de Calculo IR para funcionarios!!!\n");
-		
+		Menu menuPrincipal = new Menu(); 
+		System.out.println("-----------------------------------------------------------");
+		System.out.println("Bem vindo ao sistema de Calculo IR para funcionarios!!!");
+		System.out.println("-----------------------------------------------------------\n");
 		Scanner inMenu = new Scanner(System.in);
 		int menus;
+
 		do {
-			menuC.exibirMenu();
+			menuPrincipal.exibirMenu();
 			menus = inMenu.nextInt();
 			
 			switch (menus) {
 			case 1: {
-				menuC.adicionarPessoasConsole(); 	
+				menuPrincipal.adicionarPessoasConsole(); 	
 			}break;
 			case 2:{
-				menuC.listarPessoasConsole();
+				menuPrincipal.listarPessoasConsole();
 			}break;
 			case 3:
-				menuC.escreverSaida();
+				menuPrincipal.escreverSaida();
 			break;
 			case 4:
-				menuC.calcularViaCSV();
+				menuPrincipal.calcularViaCSV();
 				break;
 			case 0:
 				System.out.println("Sistema encerrado.");
@@ -40,7 +42,7 @@ public class FolhaPagamento {
 			
 		}while(menus!=0);
 	inMenu.close();
-	menuC.fecharScanners();
+	menuPrincipal.fecharScanners();
 
 }
 

@@ -3,6 +3,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import br.com.serratec.folhaPagamento.exceptions.DependenteException;
 
 public final class Funcionario extends Pessoa  {
@@ -19,20 +20,13 @@ public final class Funcionario extends Pessoa  {
 		super(nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
 		this.rg = rg;
-		//super.verificarTamCpf();
+		super.verificarTamCpf();
 	}	
 	
-	public Funcionario() {
-	}
-
-	final public void adicionarDependente(Dependente dp) {
-		listaDependente.add(dp);
-	}
-
 	public String getRg() {
 		return rg;
 	}
-
+	
 	public double getSalarioBruto() {
 		return salarioBruto;
 	}
@@ -44,34 +38,34 @@ public final class Funcionario extends Pessoa  {
 	public double getDescontoIR() {
 		return descontoIR;
 	}
-
+	
 	public double getSalarioLiquido() {
 		return salarioLiquido;
 	}
-
+	
 	public List<Dependente> getListaDependente() {
 		return listaDependente;
 	}
-		
+	
 	public void listarDependentes() {
-		for (Dependente dp : listaDependente) {
-			System.out.println(dp.toString());
+		for (Dependente dependente : listaDependente) {
+			System.out.println(dependente.toString());
 		}
 	}
 	
-	final public void verificarCpfRepetidoDependente() {
-		for (Dependente ld : listaDependente) {
-			int cont = 0;
-			for (Dependente dp : listaDependente) {
-				if (dp.getCpf().equals(ld.getCpf())) {
-					cont++;
-				}
-				if (cont >= 2) {
-					throw new DependenteException(
-							"Dependente: " + dp.getNome() + " \neste cpf ja foi cadastrado em nosso sistema");
-				}
+	final public void adicionarDependente(Dependente dependente) {
+		this.validarCPFDependente(dependente.getCpf());
+		listaDependente.add(dependente);
+	}
+	
+	private void validarCPFDependente(String cpf) {
+		this.listaDependente.forEach((Dependente dependente) -> {
+			Boolean CPFInvalido = dependente.getCpf().equals(cpf);
+
+			if (CPFInvalido) {
+				throw new DependenteException("Este cpf ja foi cadastrado em nosso sistema dependente: " + dependente.getNome());
 			}
-		}
+		});
 	}
 
 	final public void verificarCpfRepetidoFuncionario(List<Funcionario> listaF ){

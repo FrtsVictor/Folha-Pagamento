@@ -35,7 +35,6 @@ public class Menu {
     String horario = hourMinuteSecond.format(LocalTime.now());
     private List<Funcionario> listaFuncionarioInput = new ArrayList<Funcionario>();
     
-    
 
     public void exibirMenu(){
 		System.out.println("(1) - Adicionar funcionarios e dependentes via console");
@@ -45,8 +44,7 @@ public class Menu {
         System.out.println("(0) - Sair do programa.");
         System.out.println("v1.1\n");
 	}
-
-    
+  
     public void fecharScanners(){
         entradaF.close();
         entradaDp.close();        
@@ -58,7 +56,7 @@ public class Menu {
         System.out.printf("%s - Opcao 1 selecionada.\n", horario);
         System.out.println("Digite o nome do funcionario: ");
         nome = entradaF.nextLine();
-        if(nome.isEmpty()){ nome = entradaF.nextLine();}     
+        if(nome.isEmpty()){ nome = entradaF.nextLine();}
         System.out.println("Digite o CPF do funcionario. (CPF valido somente de 11 digitos)");
         cpf = entradaF.nextLine();
         System.out.println("Digite o RG do funcionario");
@@ -87,7 +85,6 @@ public class Menu {
 
             Dependente dependente = new Dependente(nome, cpf, dataNascimento, Parentesco.valueOf(tipoDependente));
             funcionario.adicionarDependente(dependente);
-            funcionario.verificarCpfRepetidoDependente();
             System.out.printf("\n%s - Dependente adicionado com sucesso!!\n\n" , horario);
             System.out.println("Funcionario possui mais dependentes? sim/nao");
             resposta1 = dp.nextLine().toLowerCase();
@@ -97,7 +94,7 @@ public class Menu {
         }
         
         //Listar funcionarios e dependentes adicionados manualmente.
-        public void listarPessoasConsole(){
+    public void listarPessoasConsole(){
             System.out.printf("%s - Opcao 2 selecionada.\n", horario);
             System.out.println("Lista de Funcionario com seus dependentes:\n");
             for (Funcionario func : listaFuncionarioInput) {
@@ -107,7 +104,7 @@ public class Menu {
         }
          
         //Escrevendo saída de arquivos
-        public void escreverSaida() {
+    public void escreverSaida() {
             System.out.printf("Opcao 3 Selecionada \n%s - Gravando arquivos no diretorio de saida...\n", horario );
             try {
                 BufferedWriter bf2 = new BufferedWriter(new FileWriter(saidaInput));
@@ -141,18 +138,18 @@ public class Menu {
                     if (pessoa.length == 5) {								
                         funcionario = new Funcionario(pessoa[0], pessoa[1], pessoa[2], LocalDate.parse(pessoa[3], formatter), Double.parseDouble(pessoa[4]));
                         listaFuncionarios.add(funcionario);							
-                    } else if (pessoa.length == 4) {								
+                    } 
+                     if (pessoa.length == 4) {								
                         Dependente dependente = new Dependente(pessoa[0], pessoa[1],LocalDate.parse(pessoa[2], formatter), Parentesco.valueOf(pessoa[3]));
                         funcionario.adicionarDependente(dependente);
                     }
                     Calculos calc = new Calculos(funcionario);
                     calc.calcularImpostoRenda();
-                    funcionario.verificarCpfRepetidoDependente();
-                } 
+
+                }
 
                 funcionario.verificarCpfRepetidoFuncionario(listaFuncionarios);
-                BufferedWriter bf = new BufferedWriter(new FileWriter(saidaArqCSV));
-                
+                BufferedWriter bf = new BufferedWriter(new FileWriter(saidaArqCSV));           
                 for (Funcionario func : listaFuncionarios) {							
                     System.out.println(func.getNome());							
                     System.out.printf("Salario Bruto: %.2f", func.getSalarioBruto());

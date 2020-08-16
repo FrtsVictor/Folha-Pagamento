@@ -1,5 +1,6 @@
 package br.com.serratec.folhaPagamento.classeConcreta;
 import java.time.LocalDate;
+
 import br.com.serratec.folhaPagamento.exceptions.CPFException;
 
 public abstract class Pessoa {
@@ -8,20 +9,18 @@ public abstract class Pessoa {
     protected LocalDate dataNascimento;
     
     public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+        this.validarCPF(cpf);
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
- 
-	public Pessoa() {
-		super();
-	}
 
-	public void verificarTamCpf(){
+	final public void verificarTamCpf(){
         if (this.cpf.length() != 11){
             throw new CPFException("Pessoa " + nome + " de cpf " + this.cpf + " possui um CPF invalido");
         }
     }
+
 
     public String getNome() {
         return nome;
@@ -34,7 +33,11 @@ public abstract class Pessoa {
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
-    
+
+	// TODO: validação cpf https://dicasdeprogramacao.com.br/algoritmo-para-validar-cpf/
+	private void validarCPF(String cpf) {
+		//se CPF inválido, throw
+	}
     
 	@Override
 	public int hashCode() {
