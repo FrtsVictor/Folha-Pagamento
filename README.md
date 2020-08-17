@@ -1,10 +1,9 @@
-#  <i> :pushpin: Projeto final da disciplina de JAVA 1 :coffee:
+#  <i> :pushpin: Projeto final, disciplina JAVA  :coffee:
 
 ## Folha de Pagamento :page_facing_up:
 
 
-:computer: O projeto consiste na criação de um programa em Java que calcula o salário líquido de funcionários de uma empresa
-de acordo com os conteúdos ministrados em aula.
+:computer: O projeto consiste na criação de um programa em Java que calcule o salário líquido de funcionários, calculos feitos de acordo com INSS e Imposto de renda sobre o salário bruto e quantidade de dependentes do funcionário.
 
 ## Conteúdo abordado no projeto
 
